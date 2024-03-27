@@ -13,14 +13,14 @@ export async function POST(req: Request) {
       );
     }
 
-    const { title, content } = await req.json();
+    const { postId, text } = await req.json(); 
 
     
 
-    const newPost = await prisma.post.create({
+    const newPost = await prisma.comment.create({
       data: {
-        title,
-        content,
+        postId,
+        text,
         authorId: user.email,
       },
     });

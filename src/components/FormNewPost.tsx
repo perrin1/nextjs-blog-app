@@ -13,7 +13,7 @@ const buttonClass =
 
 const FormNewPost = () => {
   const [formData, setformData] = useState<FormData>({
-    title: "",
+    title: "", 
     content: "",
   });
 
@@ -34,12 +34,11 @@ const FormNewPost = () => {
   const handlerSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await axios.post("api/posts", formData);
+      const res = await axios.post("/api/posts", formData);
 
-      if (res.status ===200) {
+      if (res.status === 200) {
         router.push(`/blogs/${res.data.newPost.id}`);
       }
-
     } catch (error) {
       console.error(error);
     }
@@ -67,12 +66,17 @@ const FormNewPost = () => {
         />
       </div>
 
-      <button type="submit" className={buttonClass}>
+      <button
+        disabled={!data?.user?.email}
+        type="submit"
+        className={buttonClass}
+      >
         {" "}
-        Submit
+        Submit 
       </button>
     </form>
   );
 };
 
 export default FormNewPost;
+
